@@ -1,0 +1,42 @@
+.range-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  border-radius: 15px;
+  height: 6px;
+}
+
+.range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 15px;
+  width: 15px;
+  background-color: #bd9f54ef;
+  border-radius: 50%;
+  border: none;
+  transition: 0.2s ease-in-out;
+}
+
+.range-input::-moz-range-thumb {
+  height: 15px;
+  width: 15px;
+  background-color: #455a64;
+  border-radius: 50%;
+  border: none;
+  transition: 0.2s ease-in-out;
+}
+
+
+
+.bakcs{
+  background-color: #c4c4c4ad;
+}
+.cord {
+  background-color: #455a64bb;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);  
+  padding: 38px;  
+
+}

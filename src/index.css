@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "pilat-extended";
+  src: local("pilat-extended"),
+    url("./fonts/PilatExtended-Regular.ttf") format("opentype");
+}
