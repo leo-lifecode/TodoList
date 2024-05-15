@@ -7,20 +7,7 @@ import ScreenMobile from "./components/ScreenMobile";
 import { useEffect } from "react";
 
 export default function App() {
-  const getTaskLocal = JSON.parse(localStorage.getItem("tasks")) || [
-    {
-      form: {
-        name: "make a app todo with react",
-        description:
-          "created using the edit and delete features, and with a mobile display",
-        priority: "Easy",
-        fullfilment: "100",
-        category: "portfolio",
-        date: "2024-05-02",
-        time: "12:10",
-      },
-    },
-  ];
+  const getTaskLocal = JSON.parse(localStorage.getItem("tasks")) || [];
   const [tasks, setTasks] = useState(getTaskLocal);
   const [modalBox, setModalBox] = useState(false);
   const [matchingEdit, setMatchingEdit] = useState(false);
