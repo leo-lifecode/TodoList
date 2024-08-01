@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "./components/Button";
 import ButtonAdd from "./components/ButtonAdd";
 import ModalBox from "./components/ModalBox";
 import BoxDesktop from "./components/BoxDesktop";
 import ScreenMobile from "./components/ScreenMobile";
-import { useEffect } from "react";
+import icontodos from "./assets/Edit.svg";
 
 export default function App() {
   const getTaskLocal = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -13,10 +13,39 @@ export default function App() {
   const [matchingEdit, setMatchingEdit] = useState(false);
   const [id, setId] = useState(false);
   const [completed, setCompleted] = useState("");
+  const [timeoutids, setTimeoutids] = useState([]);
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
+
+  function schedulReminder() {
+    tasks.forEach((element) => {
+      const title = element.form.name;
+      const description = element.form.description;
+      const date = element.form.date;
+      const time = element.form.time;
+
+      if (element.form.fullfilment === "100") {
+        return;
+      }
+      const datetimestring = date + " " + time;
+      const schedultime = new Date(datetimestring);
+      const currenttime = new Date();
+      const timeoutdifferent = schedultime - currenttime;
+
+      if (timeoutdifferent > 0) {
+        const timeoutid = setTimeout(() => {
+          new Notification(title, {
+            icon: icontodos,
+            body: description,
+          });
+        }, timeoutdifferent);
+
+        setTimeoutids((ids) => [...ids, timeoutid]);
+      }
+    });
+  }
 
   const handleCancel = () => {
     setModalBox(false);
@@ -44,6 +73,18 @@ export default function App() {
     setId(id);
     setModalBox(true);
   };
+
+  useEffect(() => {
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          schedulReminder();
+        }
+      });
+    }
+  }, [tasks]);
 
   return (
     <div className="relative md:static w-full flex md:items-center md:justify-center bg-background min-h-screen h-full md:h-screen">
