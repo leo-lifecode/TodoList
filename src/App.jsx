@@ -7,22 +7,25 @@ import ScreenMobile from "./components/ScreenMobile";
 import icontodos from "./assets/Edit.svg";
 
 export default function App() {
-  const getTaskLocal = JSON.parse(localStorage.getItem("tasks")) || [];
+  const getTaskLocal = JSON.parse(localStorage.getItem("tasks")) || [
+    {
+      form: {
+        name: "example name : examplesss",
+        description: "example description for your tasks",
+        priority: "High",
+        fullfilment: "100",
+        category: "School",
+        date: "2024-09-25",
+        time: "15:28",
+      },
+    },
+  ];
   const [tasks, setTasks] = useState(getTaskLocal);
   const [modalBox, setModalBox] = useState(false);
   const [matchingEdit, setMatchingEdit] = useState(false);
   const [id, setId] = useState(false);
   const [completed, setCompleted] = useState("");
   const [timeoutids, setTimeoutids] = useState([]);
-  const [form, setForm] = useState({
-    name: "",
-    description: "",
-    priority: "",
-    fullfilment: "",
-    category: "",
-    date: "",
-    time: "",
-  });
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -152,8 +155,6 @@ export default function App() {
               matchingEdit={matchingEdit}
               setMatchingEdit={setMatchingEdit}
               handleCancel={handleCancel}
-              form={form}
-              setForm={setForm}
             />
           )}
         </div>

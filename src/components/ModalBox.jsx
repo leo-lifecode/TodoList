@@ -8,10 +8,18 @@ const ModalBox = ({
   handleSave,
   matchingEdit,
   setMatchingEdit,
-  form,
-  setForm,
+
 }) => {
   const [prio, setPrio] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    description: "",
+    priority: "",
+    fullfilment: "",
+    category: "",
+    date: "",
+    time: "",
+  });
   function handleChange(e) {
     const { name, value } = e.target;
     if (matchingEdit) {
