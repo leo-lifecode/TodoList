@@ -14,12 +14,24 @@ export default function App() {
   const [id, setId] = useState(false);
   const [completed, setCompleted] = useState("");
   const [timeoutids, setTimeoutids] = useState([]);
+  const [form, setForm] = useState({
+    name: "",
+    description: "",
+    priority: "",
+    fullfilment: "",
+    category: "",
+    date: "",
+    time: "",
+  });
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
   function schedulReminder() {
+    timeoutids.forEach(clearTimeout);
+    setTimeoutids([]);
+
     tasks.forEach((element) => {
       const title = element.form.name;
       const description = element.form.description;
@@ -53,6 +65,13 @@ export default function App() {
   };
 
   function handleSave(form) {
+    if (
+      Object.values(form).every((value) => value === "") &&
+      matchingEdit === false
+    ) {
+      return setModalBox(false);
+    }
+
     if (matchingEdit) {
       const updatedTasks = [...tasks];
       updatedTasks[id].form = matchingEdit;
@@ -96,9 +115,22 @@ export default function App() {
           <div className="flex justify-between gap-x-[30px] lg:gap-x-[50px] xl:gap-x-[70px]">
             <ButtonAdd onClick={() => setModalBox(!modalBox)} />
             <div className="hidden md:flex sm:space-x-2 lg:space-x-5 flex-shrink-0 font-pilat">
-              <Button onClick={() => setCompleted("")}>All</Button>
-              <Button onClick={() => setCompleted("todo")}>To do</Button>
-              <Button onClick={() => setCompleted("completed")}>
+              <Button
+                onClick={() => setCompleted("")}
+                active={completed === ""}
+              >
+                All
+              </Button>
+              <Button
+                onClick={() => setCompleted("todo")}
+                active={completed === "todo"}
+              >
+                To do
+              </Button>
+              <Button
+                onClick={() => setCompleted("completed")}
+                active={completed === "completed"}
+              >
                 Completed
               </Button>
             </div>
@@ -120,6 +152,8 @@ export default function App() {
               matchingEdit={matchingEdit}
               setMatchingEdit={setMatchingEdit}
               handleCancel={handleCancel}
+              form={form}
+              setForm={setForm}
             />
           )}
         </div>
