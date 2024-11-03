@@ -34,7 +34,6 @@ export default function App() {
   function schedulReminder() {
     timeoutids.forEach(clearTimeout);
     setTimeoutids([]);
-
     tasks.forEach((element) => {
       const title = element.form.name;
       const description = element.form.description;
