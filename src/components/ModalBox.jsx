@@ -8,18 +8,18 @@ const ModalBox = ({
   handleSave,
   matchingEdit,
   setMatchingEdit,
+
 }) => {
-  const [priority, setPriority] = useState("");
+  const [prio, setPrio] = useState("");
   const [form, setForm] = useState({
     name: "",
     description: "",
-    priority: ``,
+    priority: "",
     fullfilment: "",
     category: "",
     date: "",
     time: "",
   });
-
   function handleChange(e) {
     const { name, value } = e.target;
     if (matchingEdit) {
@@ -30,11 +30,15 @@ const ModalBox = ({
   }
 
   useEffect(() => {
-    setForm((prevForm) => ({ ...prevForm, priority: priority }));
+    setForm((prevForm) => ({ ...prevForm, priority: prio }));
+
     if (matchingEdit) {
-      setMatchingEdit((prevForm) => ({ ...prevForm, priority: priority }));
+      setMatchingEdit((prevForm) => ({
+        ...prevForm,
+        priority: prio === "" ? matchingEdit["priority"] : prio,
+      }));
     }
-  }, [priority]);
+  }, [prio]);
 
   return (
     <div className="absolute inset-0 bg-white  py-[24px] md:py-[10px] lg:py-[30px] px-[50px]">
@@ -59,8 +63,8 @@ const ModalBox = ({
             <LabelInput
               name="priority"
               dropdown={true}
-              priority={priority}
-              setPriority={setPriority}
+              prio={prio}
+              setPrio={setPrio}
               description="select from dropdown"
               margin="md:me-[84px] lg:me-[42px]"
             >

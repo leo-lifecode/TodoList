@@ -2,6 +2,7 @@ import React from "react";
 import Task from "./Task";
 
 const BoxDesktop = ({ handleDelete, tasks, handleEdit, completed }) => {
+  
   return (
     <div className="hidden md:block bg-white bg-opacity-75 mt-[50px] rounded-[20px] py-[18px] sm:px-2 md:ps-[61px] md:pe-[30px] h-[350px] overflow-y-auto">
       <table className="w-full text-left table-auto">
@@ -26,7 +27,7 @@ const BoxDesktop = ({ handleDelete, tasks, handleEdit, completed }) => {
                       key={index}
                       index={index}
                       name={item.form.name}
-                      description={item.form.description} 
+                      description={item.form.description}
                       date={item.form.date}
                       time={item.form.time}
                       category={item.form.category}

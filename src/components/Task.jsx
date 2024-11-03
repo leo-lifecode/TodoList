@@ -19,7 +19,7 @@ const Task = ({
       <td className="p-1 max-w-[120px] break-words h-[20px]">{description}</td>
       <td className="text-center p-2 break-words max-w-[120px]">{category}</td>
       <td className="text-center p-2 h-0">
-        {date}  {time}
+        {date} {time}
       </td>
       <td
         className={`text-center p-2 font-semibold ${
@@ -48,13 +48,15 @@ const Task = ({
           <img
             src={Delete}
             onClick={() => handleDelete(index)}
-            alt="Edit"
+            alt="delete"
             className="cursor-pointer hover:bg-slate-400 rounded-full duration-200 "
           />
           <img
-            onClick={() => handleEdit(index)}
+            onClick={() => {
+              handleEdit(index);
+            }}
             src={Edit}
-            alt="Delete"
+            alt="edit"
             className="cursor-pointer hover:bg-slate-400 rounded-full duration-200`"
           />
         </div>

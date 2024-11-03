@@ -1,5 +1,3 @@
-import React from "react";
-
 const LabelInput = ({
   children,
   textarea = false,
@@ -10,12 +8,13 @@ const LabelInput = ({
   description,
   margin,
   name,
-  priority,
-  setPriority,
+  prio,
+  setPrio,
   dropdown,
   onchange,
   value,
 }) => {
+  console.log(prio);
   return (
     <>
       <div className={`${margin} lg:mb-[33px]`}>{children}</div>
@@ -45,10 +44,8 @@ const LabelInput = ({
         {dropdown && (
           <select
             name={name}
-            value={priority}
-            onChange={
-              (e) => setPriority(e.target.value) // Call setPriority with the selected value from the dropdown
-            }
+            value={prio}
+            onChange={(e) => setPrio(e.target.value)}
             className="border border-black px-2 py-[5px] text-[16px] placeholder:text-[16px] w-full lg:w-[200px] xl:w-full"
           >
             <option value="">Select an option</option>
